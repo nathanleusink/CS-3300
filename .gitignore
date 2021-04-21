@@ -32,3 +32,6 @@
 
 # Coverage File
 coverage/
+
+echo coverage >> .gitignore
+
