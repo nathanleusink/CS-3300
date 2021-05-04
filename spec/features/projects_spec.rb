@@ -1,9 +1,32 @@
 require 'rails_helper'
+#require_relative 'support/controller_macros'
+
+RSpec.feature "Create User", type: :feature do
+  context "Test User Login" do
+
+    visit projects_path
+    click_button "Sign up"
+    
+    within("form") do
+      fill_in "Email", with: "testemail@test.com"
+      fill_in "Password", with: "password"
+      fill_in "Password confirmation", with: "password"
+    end
+  end
+
+  scenario "should be successful" do
+    click_button "Sign up"
+    expect(page).to have_content("Welcome! You have signed up successfully.")
+  end   
+end
+
 
 RSpec.feature "Projects", type: :feature do
   context "Create new project" do
+    
     before(:each) do
       visit new_project_path
+      
       within("form") do
         fill_in "Title", with: "Test title"
       end
@@ -45,6 +68,7 @@ RSpec.feature "Projects", type: :feature do
   end
 
   context "Remove existing project" do
+    login_user()
     let!(:project) { Project.create(title: "Test title", description: "Test content") }
     scenario "remove project" do
       visit projects_path
