@@ -8,6 +8,7 @@ gem 'rails', '~> 5.2.5'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
+gem "autoprefixer-rails"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -23,8 +24,6 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.6.0'
-gem 'execjs' 
-gem 'therubyracer'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
