@@ -1,32 +1,19 @@
 require 'rails_helper'
 #require_relative 'support/controller_macros'
 
-RSpec.feature "Create User", type: :feature do
-  context "Test User Login" do
-
-    visit projects_path
-    click_button "Sign up"
-    
-    within("form") do
-      fill_in "Email", with: "testemail@test.com"
-      fill_in "Password", with: "password"
-      fill_in "Password confirmation", with: "password"
-    end
-  end
-
-  scenario "should be successful" do
-    click_button "Sign up"
-    expect(page).to have_content("Welcome! You have signed up successfully.")
-  end   
-end
-
-
 RSpec.feature "Projects", type: :feature do
   context "Create new project" do
     
+    #Login and get to Create Project Page
     before(:each) do
+      visit projects_path
+      click_link "Signup/Signin"
+      click_link "Sign up"
+      fill_in "Email", with: "testemail@test.com"
+      fill_in "Password", with: "password"
+      fill_in "Password confirmation", with: "password"
+      click_button "Sign up"
       visit new_project_path
-      
       within("form") do
         fill_in "Title", with: "Test title"
       end
@@ -46,7 +33,16 @@ RSpec.feature "Projects", type: :feature do
 
   context "Update project" do
     let(:project) { Project.create(title: "Test title", description: "Test content") }
+    
+    #Login and then go to edit path
     before(:each) do
+      visit projects_path
+      click_link "Signup/Signin"
+      click_link "Sign up"
+      fill_in "Email", with: "testemail@test.com"
+      fill_in "Password", with: "password"
+      fill_in "Password confirmation", with: "password"
+      click_button "Sign up"
       visit edit_project_path(project)
     end
 
@@ -68,9 +64,15 @@ RSpec.feature "Projects", type: :feature do
   end
 
   context "Remove existing project" do
-    login_user()
     let!(:project) { Project.create(title: "Test title", description: "Test content") }
     scenario "remove project" do
+      visit projects_path
+      click_link "Signup/Signin"
+      click_link "Sign up"
+      fill_in "Email", with: "testemail@test.com"
+      fill_in "Password", with: "password"
+      fill_in "Password confirmation", with: "password"
+      click_button "Sign up"
       visit projects_path
       click_link "Destroy"
       expect(page).to have_content("Project was successfully destroyed")
