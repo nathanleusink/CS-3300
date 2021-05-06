@@ -1,13 +1,11 @@
 require 'rails_helper'
-#require_relative 'support/controller_macros'
 
 RSpec.feature "Projects", type: :feature do
   context "Create new project" do
     
     #Login and get to Create Project Page
     before(:each) do
-      visit projects_path
-      click_link "Signup/Signin"
+      visit new_user_session_path
       click_link "Sign up"
       fill_in "Email", with: "testemail@test.com"
       fill_in "Password", with: "password"
@@ -19,7 +17,7 @@ RSpec.feature "Projects", type: :feature do
       end
     end
 
-    scenario "should be successful" do
+    scenario "should be successful" do 
       fill_in "Description", with: "Test description"
       click_button "Create Project"
       expect(page).to have_content("Project was successfully created")
@@ -36,8 +34,7 @@ RSpec.feature "Projects", type: :feature do
     
     #Login and then go to edit path
     before(:each) do
-      visit projects_path
-      click_link "Signup/Signin"
+      visit new_user_session_path
       click_link "Sign up"
       fill_in "Email", with: "testemail@test.com"
       fill_in "Password", with: "password"
@@ -66,14 +63,13 @@ RSpec.feature "Projects", type: :feature do
   context "Remove existing project" do
     let!(:project) { Project.create(title: "Test title", description: "Test content") }
     scenario "remove project" do
-      visit projects_path
-      click_link "Signup/Signin"
+      visit new_user_session_path
       click_link "Sign up"
       fill_in "Email", with: "testemail@test.com"
       fill_in "Password", with: "password"
       fill_in "Password confirmation", with: "password"
       click_button "Sign up"
-      visit projects_path
+      visit edit_page_projects_path
       click_link "Destroy"
       expect(page).to have_content("Project was successfully destroyed")
       expect(Project.count).to eq(0)

@@ -10,7 +10,7 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-3">Welcome!</h1>
+          <h1 class="display-3">Edit Project Page!</h1>
           <p>This website is designed to showcase and provide ease of access for coding projects. Anyone is allowed to view the projects. However, if you want to edit the projects, you will need to authenticate yourself and justify your need to do so.</p>
         </div>
       </div>
@@ -23,6 +23,7 @@
               <h2><%=project.title%></h2>
               <p><%=project.description%></p>
               <%= link_to 'Show', project, :class => "btn btn-secondary" %>
+              <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
             </div>
             <% end %>
         </div>
@@ -31,4 +32,7 @@
       </main>
 </table>
 
+<br>
+<%= link_to 'Add New Project', "/projects/new", :class => "btn btn-primary btn-lg btn-block" %>
+<br>
 <br>

@@ -8,6 +8,17 @@ class ProjectsController < ApplicationController
     @projects = Project.all
   end
 
+  # GET /projects/list or /projects/list.json
+  def list
+    @projects = Project.all
+  end
+  
+  # GET /projects/edit_page or /projects/edit_page.json
+  def edit_page
+    authenticate_user!
+    @projects = Project.all
+  end
+
   # GET /projects/1 or /projects/1.json
   def show
   end
